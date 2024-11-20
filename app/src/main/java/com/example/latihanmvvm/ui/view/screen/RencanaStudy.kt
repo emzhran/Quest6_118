@@ -15,6 +15,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -30,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.latihanmvvm.R
@@ -51,12 +54,13 @@ fun RencanaStudy(
     var checked by remember { mutableStateOf(false) }
     var pilihanKelas by remember { mutableStateOf("") }
     var listData : MutableList<String> = mutableListOf(chosenDropDown, pilihanKelas)
-    Column (modifier = Modifier.fillMaxSize()
+    Column (modifier = Modifier
+        .fillMaxSize()
         .background(color = colorResource(id = R.color.primary))) {
         Row (
-            modifier = Modifier.
-            fillMaxWidth().
-            padding(16.dp), verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp), verticalAlignment = Alignment.CenterVertically
         ){
             Image(painter = painterResource(id = R.drawable.umy), contentDescription = "",
                 modifier = Modifier
@@ -82,12 +86,18 @@ fun RencanaStudy(
     }
     Box(
         modifier = Modifier
-            .background(color = Color.White,
-                shape = RoundedCornerShape(topEnd = 15.dp,
-                    topStart = 15.dp)
-            ).fillMaxSize(),
+            .background(
+                color = Color.White,
+                shape = RoundedCornerShape(
+                    topEnd = 15.dp,
+                    topStart = 15.dp
+                )
+            )
+            .fillMaxSize(),
     ){
-        Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)) {
             Text(text = "Pilih Mata Kuliah Peminatan", fontWeight = FontWeight.Bold)
             Text(text = "Silahkan pilih mata kuliah yang anda inginkan",
                 fontSize = 12.sp,
@@ -111,6 +121,19 @@ fun RencanaStudy(
                         Text(data)
                     }
                 }
+            }
+            Spacer(modifier = Modifier.padding(8.dp))
+            HorizontalDivider()
+            Spacer(modifier = Modifier.padding(8.dp))
+            Text(text = "Klausul Persetujuan Mahasiswa", fontWeight = FontWeight.Bold)
+            Row(verticalAlignment = Alignment.CenterVertically){
+                Checkbox(
+                    checked = checked,
+                    onCheckedChange = {checked = it},
+                    enabled = chosenDropDown.isNotBlank() && pilihanKelas.isNotBlank()
+                )
+                Text(text = "Saya menyetujui setiap pernyataan yang ada tanpa ada paksaan dari pihak manapun.",
+                    fontWeight = FontWeight.Light, fontSize = 10.sp)
             }
         }
     }
