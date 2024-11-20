@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Icon
@@ -30,7 +31,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.latihanmvvm.R
+import com.example.latihanmvvm.data.MataKuliah
 import com.example.latihanmvvm.model.Mahasiswa
+import com.example.latihanmvvm.widget.DynamicSelectedField
 
 
 @Composable
@@ -72,6 +75,27 @@ fun RencanaStudy(
             Icon(imageVector = Icons.Filled.Notifications,
                 contentDescription = "",
                 tint = Color.White)
+        }
+    }
+    Box(
+        modifier = Modifier
+            .background(color = Color.White,
+                shape = RoundedCornerShape(topEnd = 15.dp,
+                    topStart = 15.dp)
+            ).fillMaxSize(),
+    ){
+        Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+            Text(text = "Pilih Mata Kuliah Peminatan", fontWeight = FontWeight.Bold)
+            Text(text = "Silahkan pilih mata kuliah yang anda inginkan",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.padding(8.dp))
+            DynamicSelectedField(selectedValue = chosenDropDown,
+                options = MataKuliah.options,
+                label = "Mata Kuliah",
+                onValueChangedEvent = {
+                    chosenDropDown = it
+                })
         }
     }
 }
