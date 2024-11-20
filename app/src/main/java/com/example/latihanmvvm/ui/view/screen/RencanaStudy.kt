@@ -2,6 +2,7 @@ package com.example.latihanmvvm.ui.view.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Icon
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.latihanmvvm.R
 import com.example.latihanmvvm.data.MataKuliah
+import com.example.latihanmvvm.data.RuangKelas
 import com.example.latihanmvvm.model.Mahasiswa
 import com.example.latihanmvvm.widget.DynamicSelectedField
 
@@ -96,6 +99,19 @@ fun RencanaStudy(
                 onValueChangedEvent = {
                     chosenDropDown = it
                 })
+            Spacer(modifier = Modifier.padding(8.dp))
+            Row (modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly){
+                RuangKelas.kelas.forEach{data ->
+                    Row(verticalAlignment = Alignment.CenterVertically){
+                        RadioButton(
+                            selected = pilihanKelas == data,
+                            onClick = {pilihanKelas = data}
+                        )
+                        Text(data)
+                    }
+                }
+            }
         }
     }
 }
