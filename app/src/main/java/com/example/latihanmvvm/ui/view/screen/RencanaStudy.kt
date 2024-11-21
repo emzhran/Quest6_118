@@ -44,7 +44,7 @@ import com.example.latihanmvvm.widget.DynamicSelectedField
 
 
 @Composable
-fun RencanaStudy(
+fun RencanaStudyView(
     mahasiswa: Mahasiswa,
     onSubmitButtonClicked: (MutableList<String>) -> Unit,
     onBackButtonClicked: () -> Unit
