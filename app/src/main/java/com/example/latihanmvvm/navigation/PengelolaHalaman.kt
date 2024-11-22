@@ -13,6 +13,7 @@ import com.example.latihanmvvm.ui.view.screen.SplashView
 import com.example.latihanmvvm.ui.view.viewmodel.MahasiswaViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.latihanmvvm.ui.view.screen.RencanaStudyView
+import com.example.latihanmvvm.ui.view.screen.TampilView
 import com.example.latihanmvvm.ui.view.viewmodel.RencanaStudyViewModel
 
 
@@ -28,10 +29,12 @@ fun MahasiswaApp(
     modifier: Modifier = Modifier,
     mahasiswaViewModel: MahasiswaViewModel = viewModel(),
     krsViewModel: RencanaStudyViewModel = viewModel(),
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+
 ){
     //val uiState = viewModel.statusUI.collectAsState()
     val mahasiswaUiState = mahasiswaViewModel.mahasiswaUiState.collectAsState().value
+    val krsUiState = krsViewModel.krsStateUi.collectAsState().value
 
     NavHost(
         navController = navController,
@@ -55,8 +58,15 @@ fun MahasiswaApp(
             RencanaStudyView(
                 mahasiswa = mahasiswaUiState,
                 onBackButtonClicked = {navController.popBackStack()},
-                onSubmitButtonClicked ={krsViewModel.saveDataKRS(it)}
+                onSubmitButtonClicked ={krsViewModel.saveDataKRS(it)
+                navController.navigate(Halaman.Tampil.name)}
             )
+        }
+        composable(route = Halaman.Tampil.name){
+            TampilView(mahasiswa = mahasiswaUiState,
+                krs =krsUiState,
+                onResetButtonClicked = {navController.navigate(Halaman.Splash.name)},
+                onBackButtonClicked = {navController.popBackStack() })
         }
     }
 }

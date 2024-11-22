@@ -24,4 +24,6 @@ class RencanaStudyViewModel : ViewModel() {
             namaMK = ls[0],
             kelas = ls[1]) }
     }
+
+    fun resetDataKRS() { _krsState.update { RencanaStudi() } }
 }
