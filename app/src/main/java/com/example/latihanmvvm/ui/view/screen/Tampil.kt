@@ -90,5 +90,21 @@ fun Tampil(
                     fontSize = 12.sp)
             }
         }
+        Spacer(modifier = Modifier.padding(14.dp))
+        Column (modifier = Modifier.fillMaxWidth()){
+            Text(text = "MataKuliah peminatan yang dipilih :",
+                fontWeight = FontWeight.Bold,
+                fontSize = 12.sp
+            )
+            Text(text = krs.namaMK,
+                fontWeight = FontWeight.Light,
+                fontSize = 12.sp)
+            Text(text = "Kelas :",
+                fontWeight = FontWeight.Bold,
+                fontSize = 12.sp)
+            Text(text = krs.kelas,
+                fontWeight = FontWeight.Light,
+                fontSize = 12.sp)
+        }
     }
 }
